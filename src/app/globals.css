@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* iOS Safari viewport handling */
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+@supports (-webkit-touch-callout: none) {
+  /* iOS specific */
+  html {
+    height: -webkit-fill-available;
+  }
+  
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Mobile-specific styles for actual mobile devices */
+@supports (-webkit-touch-callout: none) {
+  /* iOS specific */
+  .h-screen {
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+  
+  /* Ensure fixed positioning works properly on iOS */
+  .fixed {
+    position: fixed;
+    -webkit-transform: translateZ(0);
+  }
+  
+  /* Force toolbar to stay at bottom */
+  [data-testid="editor-toolbar"] {
+    position: fixed !important;
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* TipTap Placeholder Styling */
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror .is-editor-empty::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Dark mode placeholder */
+@media (prefers-color-scheme: dark) {
+  .ProseMirror p.is-editor-empty:first-child::before,
+  .ProseMirror .is-editor-empty::before {
+    color: #6b7280;
+  }
+}
+
+/* Paragraph spacing - normal line height within paragraphs, spacing between paragraphs */
+.ProseMirror p {
+  margin-top: 0;
+  margin-bottom: 1em; /* Space between paragraphs */
+  line-height: 1.5; /* Normal line height within paragraph */
+}
+
+.ProseMirror p:first-child {
+  margin-top: 0;
+}
+
+.ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+/* Remove prose spacing that might interfere */
+.ProseMirror.prose p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+/* List styling */
+.ProseMirror ul.bullet-list,
+.ProseMirror ol.ordered-list {
+  padding-left: 1.5rem;
+  margin: 0.75em 0;
+}
+
+.ProseMirror ul.bullet-list {
+  list-style-type: disc;
+}
+
+.ProseMirror ol.ordered-list {
+  list-style-type: decimal;
+}
+
+.ProseMirror li.list-item {
+  margin: 0.25em 0;
+  line-height: 1.5;
+}
+
+.ProseMirror li.list-item p {
+  margin: 0;
+}
+
+/* Nested lists */
+.ProseMirror ul ul,
+.ProseMirror ol ol,
+.ProseMirror ul ol,
+.ProseMirror ol ul {
+  margin: 0.25em 0;
+}
+
+/* Task list (checklist) styling */
+.ProseMirror ul.task-list {
+  list-style-type: none;
+  padding-left: 0.25rem;
+  margin: 0.75em 0;
+}
+
+.ProseMirror li.task-item {
+  position: relative;
+  margin: 0.25em 0;
+  line-height: 1.5;
+  display: flex;
+  align-items: center; /* Changed from flex-start to center */
+  gap: 0.5rem;
+}
+
+.ProseMirror li.task-item > label {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 1.5em; /* Match line height */
+}
+
+.ProseMirror li.task-item > label > input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+  accent-color: #f97316; /* Orange accent to match cursor */
+  width: 16px;
+  height: 16px;
+}
+
+.ProseMirror li.task-item > div {
+  flex: 1;
+  margin: 0;
+  display: flex;
+  align-items: center; /* Center the content vertically */
+  min-height: 1.5em; /* Match line height */
+}
+
+.ProseMirror li.task-item p {
+  margin: 0;
+  display: inline-block;
+}
+
+/* Text selection styling */
+.ProseMirror ::selection {
+  background-color: #d6d6d6; /* 214, 214, 214 */
+  color: #7a7a7a; /* 122, 122, 122 for light mode */
+}
+
+/* Dark mode text selection */
+@media (prefers-color-scheme: dark) {
+  .ProseMirror ::selection {
+    background-color: rgba(84, 84, 84, 0.99); /* 84, 84, 84 with opacity to ensure visibility */
+    color: #b8b8b8; /* 184, 184, 184 for dark mode */
+    text-shadow: none; /* Remove any text shadows that might interfere */
+  }
+  
+  /* Also apply to moz-selection for Firefox */
+  .ProseMirror ::-moz-selection {
+    background-color: rgba(84, 84, 84, 0.99);
+    color: #b8b8b8;
+    text-shadow: none;
+  }
+}
+
+/* List styling in dark mode */
+@media (prefers-color-scheme: dark) {
+  .ProseMirror ul.bullet-list,
+  .ProseMirror ol.ordered-list,
+  .ProseMirror ul.task-list,
+  .ProseMirror li.list-item,
+  .ProseMirror li.task-item {
+    color: inherit;
+  }
+  
+  .ProseMirror li.task-item > label > input[type="checkbox"] {
+    accent-color: #fb923c; /* Lighter orange for dark mode */
+  }
+}
