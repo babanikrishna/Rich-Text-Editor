@@ -6,13 +6,13 @@ A rich text email editor built with Next.js and TipTap, designed with clean engi
 ## Screenshots
 
 ### Light Mode
-![Light Mode Editor](../project-screenshots/Screenshot%202025-08-08%20at%209.06.49%20PM.png)
+![Light Mode Editor](project-screenshots/Screenshot%202025-08-08%20at%209.06.49%E2%80%AFPM.png)
 
 ### Dark Mode
-![Dark Mode Editor](../project-screenshots/Screenshot%202025-08-08%20at%209.07.00%20PM.png)
+![Dark Mode Editor](project-screenshots/Screenshot%202025-08-08%20at%209.07.00%E2%80%AFPM.png)
 
 ### Mobile View
-![Mobile View](../project-screenshots/Screenshot%202025-08-08%20at%209.08.50%20PM.png)
+![Mobile View](project-screenshots/Screenshot%202025-08-08%20at%209.08.50%E2%80%AFPM.png)
 
 ## Architecture
 
